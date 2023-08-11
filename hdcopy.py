@@ -4,9 +4,9 @@ import keyboard, time
 import math
 cap = cv2.VideoCapture(0)
 detector = HandDetector(detectionCon=0.8, maxHands=2)
-t = 0.18
+t = 0.2
 while True:
-    success, img = cap.read()
+    img = cap.read()[1]
     hands = detector.findHands(img, draw=False)
     
     if len(hands) == 2:
@@ -18,7 +18,7 @@ while True:
         h1 = hand1['center']
         h2 = hand2['center']
         
-        if h1[0] < 960:
+        if h1[0] < h2[0]:
             right = h1
             left = h2
             rf = fingers1
